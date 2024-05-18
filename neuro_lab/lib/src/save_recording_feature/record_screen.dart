@@ -1,91 +1,54 @@
-// import 'package:audioplayers/audioplayers.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:neuro_lab/src/save_recording_feature/audio_player.dart';
+import 'package:neuro_lab/src/save_recording_feature/audio_recorder.dart';
 
-// class RecordingScreen extends StatefulWidget {
-//   const RecordingScreen({super.key});
+class RecordScreen extends StatefulWidget {
+  const RecordScreen({super.key});
 
-//   @override
-//   // ignore: library_private_types_in_public_api
-//   _RecordingScreenState createState() => _RecordingScreenState();
-// }
+  @override
+  State<RecordScreen> createState() => _RecordScreenState();
+}
 
-// class _RecordingScreenState extends State<RecordingScreen> {
-//   bool isRecording = false;
-//   String? filePath;
-//   String status = "Unknown";
+class _RecordScreenState extends State<RecordScreen> {
+  bool showPlayer = false;
+  String? audioPath;
 
-//   void startRecording() async {
-//     final service = FlutterBackgroundService();
-//     service.startService();
-//     setState(() {
-//       isRecording = true;
-//     });
-//   }
+  @override
+  void initState() {
+    showPlayer = false;
+    super.initState();
+  }
 
-//   void stopRecording() async {
-//     final service = FlutterBackgroundService();
-//     service.invoke('stopService');
-//     setState(() {
-//       isRecording = false;
-//     });
-//   }
-
-//   void playAudio() async {
-//     if (filePath != null) {
-//       AudioPlayer audioPlayer = AudioPlayer();
-//       await audioPlayer.play(filePath!, isLocal: true);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Starry Night', style: TextStyle(color: Colors.white)),
-//         backgroundColor: Colors.transparent,
-//         elevation: 0,
-//         flexibleSpace: Container(
-//           decoration: BoxDecoration(
-//             gradient: LinearGradient(
-//               colors: [Colors.indigo.shade900, Colors.indigo.shade700],
-//               begin: Alignment.topCenter,
-//               end: Alignment.bottomCenter,
-//             ),
-//             boxShadow: [
-//               BoxShadow(
-//                 color: Colors.black.withOpacity(0.3),
-//                 spreadRadius: 2,
-//                 blurRadius: 10,
-//               ),
-//             ],
-//           ),
-//         ),
-//         iconTheme: IconThemeData(color: Colors.white),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               isRecording ? "Recording..." : "Press to start recording",
-//               style: TextStyle(color: Colors.white, fontSize: 20),
-//             ),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: isRecording ? stopRecording : startRecording,
-//               child: Text(isRecording ? "Stop Recording" : "Start Recording"),
-//             ),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: playAudio,
-//               child: Text("Play Recording"),
-//             ),
-//             SizedBox(height: 20),
-//             Text("Status: $status"),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Record and Play Audio'),
+        ),
+        body: Center(
+          child: showPlayer
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: AudioPlayer(
+                    source: audioPath!,
+                    onDelete: () {
+                      setState(() => showPlayer = false);
+                    },
+                  ),
+                )
+              : Recorder(
+                  onStop: (path) {
+                    if (kDebugMode) print('Recorded file path: $path');
+                    setState(() {
+                      audioPath = path;
+                      showPlayer = true;
+                    });
+                  },
+                ),
+        ),
+      ),
+    );
+  }
+}
