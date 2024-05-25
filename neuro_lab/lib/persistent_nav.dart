@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:neuro_lab/my_drawer.dart';
 import 'package:neuro_lab/src/save_recording_feature/record_page.dart';
-import 'package:neuro_lab/src/save_recording_feature/records_list_view.dart';
+import 'package:neuro_lab/src/save_recording_feature/record_list_view.dart';
 import 'package:neuro_lab/src/settings/settings_view.dart';
 
 class PersistentTabScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
   }
 
   List<Widget> _buildScreens() {
-    return [RecordPage(), const RecordListViewPage()];
+    return [MainPage(), const RecordListViewPage()];
   }
 
   void _onPageChanged(int index) {

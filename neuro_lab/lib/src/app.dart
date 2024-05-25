@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:neuro_lab/persistent_nav.dart';
 import 'package:neuro_lab/src/about/about_view.dart';
 import 'package:neuro_lab/src/save_recording_feature/record_page.dart';
-import 'package:neuro_lab/src/save_recording_feature/records_list_view.dart';
+import 'package:neuro_lab/src/save_recording_feature/record_list_view.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -82,7 +82,7 @@ class App extends StatelessWidget {
                     return const SampleItemListView();
                   case PersistentTabScreen.routeName:
                     return const PersistentTabScreen();
-                  case RecordPage.routeName:
+                  case MainPage.routeName:
                     return const RecordListViewPage();
                   case RecordListViewPage.routeName:
                     return const RecordListViewPage();

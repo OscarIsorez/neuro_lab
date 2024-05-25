@@ -31,6 +31,7 @@ class AudioPlayerState extends State<AudioPlayer> {
   late StreamSubscription<void> _playerStateChangedSubscription;
   late StreamSubscription<Duration?> _durationChangedSubscription;
   late StreamSubscription<Duration> _positionChangedSubscription;
+
   Duration? _position;
   Duration? _duration;
 
@@ -65,6 +66,13 @@ class AudioPlayerState extends State<AudioPlayer> {
     super.dispose();
   }
 
+  String formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -91,7 +99,13 @@ class AudioPlayerState extends State<AudioPlayer> {
                 ),
               ],
             ),
-            Text('${_duration ?? 0.0}'),
+            Text(
+              _position != null && _duration != null
+                  ? formatDuration(_position!) +
+                      "/" +
+                      formatDuration(_duration!)
+                  : '00:00:00',
+            ),
           ],
         );
       },

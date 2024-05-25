@@ -155,6 +155,30 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_sound:
+    dependency: "direct main"
+    description:
+      name: flutter_sound
+      sha256: b833fb405bb8926411cf1294000066c5e0976477c5c9f39da547a369d99260f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.4.11"
+  flutter_sound_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_sound_platform_interface
+      sha256: "62756ed1be2ac0cb0499c1c7da496a97d20d116eb42a522df48306a37b374aad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.4.11"
+  flutter_sound_web:
+    dependency: transitive
+    description:
+      name: flutter_sound_web
+      sha256: b9f2cfd72aa21929cc3d9c0017fcdeb36bb07e95f5e4a698e040ca9bb7b47d2f
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.4.11"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -193,10 +217,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -229,6 +253,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   matcher:
     dependency: transitive
     description:
@@ -253,6 +285,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   particles_flutter:
     dependency: "direct main"
     description:
@@ -333,6 +373,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.2"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   record:
     dependency: "direct main"
     description:
@@ -377,10 +433,10 @@ packages:
     dependency: transitive
     description:
       name: record_web
-      sha256: "24847cdbcf999f7a5762170792f622ac844858766becd0f2370ec8ae22f7526e"
+      sha256: "0ef370d1e6553ad33c39dd03103b374e7861f3518b0533e64c94d73f988a5ffa"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.1.0"
   record_windows:
     dependency: transitive
     description:

@@ -4,24 +4,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:neuro_lab/src/save_recording_feature/audio_player.dart';
 import 'package:neuro_lab/src/save_recording_feature/audio_recorder.dart';
+import 'package:neuro_lab/src/save_recording_feature/platform/record_list_provider.dart';
+import 'package:neuro_lab/src/save_recording_feature/record_model.dart';
+import 'package:neuro_lab/utils/models/my_dialog.dart';
 import 'package:particles_flutter/particles_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:record/record.dart';
 
-class RecordPage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   static const routeName = '/record';
 
-  const RecordPage({super.key});
+  const MainPage({super.key});
 
   @override
-  _RecordPageState createState() => _RecordPageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _RecordPageState extends State<RecordPage> {
+class _MainPageState extends State<MainPage> {
   bool showPlayer = false;
   String? audioPath;
 
   @override
   void initState() {
+    super.initState();
     showPlayer = false;
   }
 
@@ -62,25 +67,33 @@ class _RecordPageState extends State<RecordPage> {
             ),
           ),
           Center(
-            child: showPlayer
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: AudioPlayer(
-                      source: audioPath!,
-                      onDelete: () {
-                        setState(() => showPlayer = false);
-                      },
-                    ),
-                  )
-                : Recorder(
-                    onStop: (path) {
-                      if (kDebugMode) print('Recorded file path: $path');
-                      setState(() {
-                        audioPath = path;
-                        showPlayer = true;
-                      });
-                    },
-                  ),
+            child: Recorder(
+              onStop: (path, timecodeHighAmplitudeList) {
+                if (kDebugMode) print('Recorded file path: $path');
+                setState(() {
+                  showDialog(
+                      context: context,
+                      builder: (context) => MyDialog(
+                            title: "Save",
+                            content: "Wanna save your record ? ",
+                            onPressed: () {
+                              Provider.of<RecordListProvider>(context,
+                                      listen: false)
+                                  .addRecording(RecordModel(
+                                path: path,
+                                date: DateTime.now(),
+                                durationHighAmplitudeList:
+                                    timecodeHighAmplitudeList,
+                              ));
+                              Navigator.of(context).pop();
+                            },
+                          ));
+
+                  audioPath = path;
+                  showPlayer = true;
+                });
+              },
+            ),
           ),
         ],
       ),
